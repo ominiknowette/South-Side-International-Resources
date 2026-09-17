@@ -192,3 +192,5 @@ npm run start
 ## License & Confidentiality
 
 All rights reserved © South Side International Resources. Proprietary institutional content, operational methodologies, and branding assets are protected under international copyright and commercial maritime nondisclosure conventions.
+#   S o u t h - S i d e - I n t e r n a t i o n a l - R e s o u r c e s  
+ 
