@@ -35,6 +35,9 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           from: sender,
           to: recipientEmail,
+          headers: {
+            "Reply-To": email,
+          },
           subject: `[New SSIR Advisory Inquiry] ${name} - ${company || "General"}`,
           html: `
             <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #0B1F33; max-width: 600px; margin: 0 auto; border: 1px solid #E2E8F0; padding: 24px; border-radius: 4px;">
