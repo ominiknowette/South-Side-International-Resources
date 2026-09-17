@@ -31,6 +31,8 @@ export async function POST(request: Request) {
         headers: {
           Authorization: `Bearer ${sendbyteKey}`,
           "Content-Type": "application/json",
+          Accept: "application/json",
+          "User-Agent": "SendByte-Node/1.0",
         },
         body: JSON.stringify({
           from: sender,
