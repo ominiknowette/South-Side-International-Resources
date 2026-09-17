@@ -21,7 +21,52 @@ export async function POST(request: Request) {
     const recipientEmail =
       process.env.CLIENT_RECEIVING_EMAIL || "info@southsideresources.com";
 
-    // 3. Provider Option A: Web3Forms (If key is configured)
+    // 3. Provider Option A: SendByte (sendbyte.africa - Built for Africa, 3,000 free emails/month)
+    const sendbyteKey = process.env.SENDBYTE_API_KEY;
+    if (sendbyteKey) {
+      const sender =
+        process.env.SENDBYTE_SENDER_EMAIL || "SSIR Inquiries <inquiries@southsideresources.com>";
+      const response = await fetch("https://api.sendbyte.africa/v1/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sendbyteKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: sender,
+          to: recipientEmail,
+          subject: `[New SSIR Advisory Inquiry] ${name} - ${company || "General"}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #0B1F33; max-width: 600px; margin: 0 auto; border: 1px solid #E2E8F0; padding: 24px; border-radius: 4px;">
+              <h2 style="color: #0B1F33; border-bottom: 2px solid #005691; padding-bottom: 8px; margin-top: 0;">New Formal Advisory Inquiry</h2>
+              <p>A new prospective engagement has been submitted through the official SSIR website portal:</p>
+              <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+                <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold; width: 140px;">Name:</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${name}</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Email:</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;"><a href="mailto:${email}">${email}</a></td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Organization:</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${company || "N/A"}</td></tr>
+              </table>
+              <div style="background-color: #F4F6F9; padding: 16px; border-left: 3px solid #005691; margin-top: 16px;">
+                <strong style="display: block; margin-bottom: 8px;">Terms of Reference / Scope:</strong>
+                <p style="margin: 0; white-space: pre-wrap;">${message}</p>
+              </div>
+              <p style="font-size: 11px; color: #718096; margin-top: 24px;">South Side International Resources &bull; 24/7 Advisory Communications</p>
+            </div>
+          `,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("SendByte API error:", await response.text());
+        return NextResponse.json(
+          { success: false, error: "SendByte delivery service error." },
+          { status: 502 }
+        );
+      }
+
+      return NextResponse.json({ success: true });
+    }
+
+    // 4. Provider Option B: Web3Forms (If key is configured)
     const web3Key = process.env.WEB3FORMS_ACCESS_KEY;
     if (web3Key) {
       const response = await fetch("https://api.web3forms.com/submit", {
