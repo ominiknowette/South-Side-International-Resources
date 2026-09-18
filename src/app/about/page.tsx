@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { IntelligenceSection } from "@/components/sections/IntelligenceSection";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 
 export const metadata: Metadata = {
@@ -219,6 +220,9 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+
+      {/* Strategic Intelligence Alliance */}
+      <IntelligenceSection />
 
       {/* Consultation CTA */}
       <ContactCTA />

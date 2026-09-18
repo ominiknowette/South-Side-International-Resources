@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { newsArticles } from "@/data/news";
@@ -42,41 +41,6 @@ export default function NewsPage() {
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
               Institutional dispatches, statutory analyses, and operational intelligence updates covering waterborne commerce and sovereign ocean governance.
             </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* Featured Strategic Partnership Banner */}
-      <section className="bg-surface-light border-b border-steel-muted py-8">
-        <Container>
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white p-6 border border-steel-muted rounded-[2px] shadow-sm max-w-5xl">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-5">
-              <div className="pr-2 sm:border-r sm:border-steel-muted">
-                <Image
-                  src="/images/lloyds-list-intelligence-navy.svg"
-                  alt="Lloyd's List Intelligence"
-                  width={220}
-                  height={34}
-                  className="h-7 sm:h-9 w-auto object-contain max-w-[180px] sm:max-w-none"
-                />
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-ocean">
-                  Strategic Alliance Special Bulletin
-                </span>
-                <h2 className="text-base font-semibold text-navy mt-0.5">
-                  Strategies for Securing the African Maritime Domain
-                </h2>
-                <p className="text-xs text-steel-dark mt-1">
-                  Joint advisory framework on dark vessel interdiction, AIS gap mitigation, and EEZ surveillance.
-                </p>
-              </div>
-            </div>
-            <div className="shrink-0">
-              <span className="inline-block text-xs font-semibold text-ocean bg-ocean/10 border border-ocean/30 px-3 py-1.5 rounded-[2px]">
-                Special Intelligence Briefing
-              </span>
-            </div>
           </div>
         </Container>
       </section>
