@@ -73,6 +73,7 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.ico",
   },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
